@@ -8,7 +8,7 @@ class Player {
   }
 
   createShip(length) {
-    ship = new Ship(length);
+    let ship = new Ship(length);
     this.gameboard.ships.push(ship);
     return ship;
   }

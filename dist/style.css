@@ -11,11 +11,12 @@ div#container {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 6rem;
 }
 
 div.gameboard {
-  width: 30rem;
-  height: 30rem;
+  min-width: 30rem;
+  min-height: 30rem;
   background-color: lightblue;
 
   display: flex;

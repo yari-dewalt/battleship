@@ -4,13 +4,12 @@ import { Ship } from "./ship.js";
 class Player {
   constructor() {
     this.gameboard = new Gameboard();
-    this.ships = [];
     this.isTurn = true;
   }
 
   createShip(length) {
     ship = new Ship(length);
-    this.ships.push(ship);
+    this.gameboard.ships.push(ship);
     return ship;
   }
 

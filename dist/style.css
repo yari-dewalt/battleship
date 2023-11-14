@@ -1,0 +1,57 @@
+html,
+body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+}
+
+div#container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div.gameboard {
+  width: 30rem;
+  height: 30rem;
+  background-color: lightblue;
+
+  display: flex;
+  flex-direction: column;
+}
+
+div.grid-row {
+  display: flex;
+  flex-grow: 1;
+}
+
+div.grid-square {
+  flex-grow: 1;
+  display: flex;
+
+  padding: 1rem;
+
+  border: solid 2px black;
+}
+
+div.square-identity {
+  flex-grow: 1;
+}
+
+div.water {
+  background-color: blue;
+}
+
+div.ship {
+  background-color: grey;
+}
+
+div.miss {
+  background-color: green;
+}
+
+div.hit {
+  background-color: red;
+}

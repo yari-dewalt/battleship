@@ -47,3 +47,6 @@ class Computer {
     );
   }
 }
+
+export { Player };
+export { Computer };

@@ -17,26 +17,33 @@ div#container {
 div.gameboard {
   min-width: 30rem;
   min-height: 30rem;
-  background-color: lightblue;
 
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
 }
 
 div.grid-row {
   display: flex;
   flex-grow: 1;
+  gap: 0.5rem;
 }
 
 div.grid-square {
   flex-grow: 1;
   display: flex;
+  background-color: lightblue;
 
-  padding: 1rem;
-
-  border: solid 2px black;
+  padding: 0.8rem;
 }
 
+div.grid-square:hover {
+  transform: scale(1.2);
+}
+
+div#computer-gameboard > div.grid-row > div.grid-square:hover {
+  cursor: pointer;
+}
 div.square-identity {
   flex-grow: 1;
 }

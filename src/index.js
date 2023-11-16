@@ -5,14 +5,24 @@ const gameboardsContainer = document.getElementsByClassName("gameboard");
 const playergameboardContainer = gameboardsContainer[0];
 const computergameboardContainer = gameboardsContainer[1];
 
+const selectableShips = document.getElementsByClassName("ship-info");
+let selectedShip;
+
+Array.from(selectableShips).forEach((ship, i) => {
+  ship.addEventListener("click", () => {
+    selectedShip = player.createShip(
+      selectableShips[i].lastElementChild.childElementCount
+    );
+  });
+});
+
 const player = new Player();
 const computer = new Computer();
 
+let gameStarted = false;
+
 let firstShip = player.createShip(2);
 let secondShip = player.createShip(4);
-
-player.gameboard.placeShip(firstShip, 2, 2, "horizontal");
-computer.gameboard.placeShip(secondShip, 1, 2, "vertical");
 
 updateBoards(player.gameboard, computer.gameboard);
 
@@ -54,6 +64,13 @@ function updateBoards(player_gameboard, computer_gameboard) {
       }
 
       gridSquare.appendChild(squareIdentity);
+
+      if (!gameStarted) {
+        gridSquare.addEventListener("click", () => {
+          player.gameboard.placeShip(selectedShip, i, j, "horizontal");
+          updateBoards(player.gameboard, computer.gameboard);
+        });
+      }
 
       gridRow.appendChild(gridSquare);
     }

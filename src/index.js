@@ -7,22 +7,49 @@ const computergameboardContainer = gameboardsContainer[1];
 
 const selectableShips = document.getElementsByClassName("ship-info");
 let selectedShip;
+let selectedShipInfo;
 
-Array.from(selectableShips).forEach((ship, i) => {
-  ship.addEventListener("click", () => {
-    selectedShip = player.createShip(
-      selectableShips[i].lastElementChild.childElementCount
-    );
-  });
-});
+let shipsDirection = "horizontal";
 
 const player = new Player();
 const computer = new Computer();
 
 let gameStarted = false;
 
-let firstShip = player.createShip(2);
-let secondShip = player.createShip(4);
+if (!gameStarted) {
+  Array.from(selectableShips).forEach((ship, i) => {
+    ship.addEventListener("click", () => {
+      if (ship.className !== "ship-info placed") {
+        Array.from(selectableShips).forEach((ship) => {
+          if (ship.className !== "ship-info placed")
+            ship.className = "ship-info";
+        });
+
+        ship.className = "ship-info selected";
+        selectedShip = player.createShip(
+          selectableShips[i].lastElementChild.childElementCount
+        );
+        selectedShipInfo = ship;
+      }
+    });
+  });
+}
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "f" || event.key === "F") {
+    if (shipsDirection === "horizontal") {
+      shipsDirection = "vertical";
+      console.log(shipsDirection);
+      return;
+    }
+
+    if (shipsDirection === "vertical") {
+      shipsDirection = "horizontal";
+      console.log(shipsDirection);
+      return;
+    }
+  }
+});
 
 updateBoards(player.gameboard, computer.gameboard);
 
@@ -67,7 +94,10 @@ function updateBoards(player_gameboard, computer_gameboard) {
 
       if (!gameStarted) {
         gridSquare.addEventListener("click", () => {
-          player.gameboard.placeShip(selectedShip, i, j, "horizontal");
+          if (player.gameboard.placeShip(selectedShip, i, j, shipsDirection)) {
+            selectedShipInfo.className = "ship-info placed";
+            selectedShip = null;
+          }
           updateBoards(player.gameboard, computer.gameboard);
         });
       }

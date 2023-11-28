@@ -5,9 +5,21 @@ import { Ship } from "./ship.js";
 const gameboardsContainer = document.getElementsByClassName("gameboard");
 const playergameboardContainer = gameboardsContainer[0];
 const computergameboardContainer = gameboardsContainer[1];
+const header = document.getElementById("header");
+const messageInfo = document.getElementsByClassName("information-message")[0];
 
 const startButton = document.getElementById("start-button");
 startButton.style.display = "none";
+
+let restartButton = document.createElement("button");
+restartButton.id = "restart-button";
+restartButton.innerHTML = "Restart Game";
+restartButton.style.display = "none";
+header.appendChild(restartButton);
+
+restartButton.addEventListener("click", () => {
+  restartGame();
+});
 
 const yourTurnText = document.getElementById("your-turn");
 yourTurnText.style.display = "none";
@@ -21,8 +33,8 @@ let selectedShipInfo;
 let shipsDirection = "horizontal";
 const directionText = document.getElementById("orientation");
 
-const player = new Player();
-const computer = new Computer();
+let player = new Player();
+let computer = new Computer();
 
 computer.createShips();
 
@@ -31,7 +43,7 @@ let gameStarted = false;
 updateBoards(player.gameboard, computer.gameboard);
 
 startButton.addEventListener("click", () => {
-  startGame();
+  if (allShipsPlaced()) startGame();
 });
 
 if (!gameStarted) {
@@ -70,7 +82,7 @@ document.addEventListener("keydown", (event) => {
 });
 
 function updateBoards(player_gameboard, computer_gameboard) {
-  if (allShipsPlaced()) {
+  if (allShipsPlaced() && !gameStarted) {
     startButton.style.display = "block";
   }
   while (playergameboardContainer.lastChild) {
@@ -170,6 +182,15 @@ function allShipsPlaced() {
 
 function startGame() {
   gameStarted = true;
+  startButton.style.display = "none";
+  while (messageInfo.childElementCount > 0) {
+    messageInfo.removeChild(messageInfo.lastElementChild);
+  }
+  let midgameInfo = document.createElement("p");
+  midgameInfo.innerHTML =
+    "The game has begun! Click on the computer's gameboard (right) to make your move.<br><br>After making your move the computer will make one in return, the first one to destroy the other's ships wins!";
+  messageInfo.appendChild(midgameInfo);
+
   updateBoards(player.gameboard, computer.gameboard);
 
   function gameLoop() {
@@ -196,11 +217,54 @@ function gameOver() {
   if (player.gameboard.allShipsSunk()) {
     console.log("the computer wins!");
     gameStarted = false;
+
+    yourTurnText.style.display = "none";
+    enemyTurnText.style.display = "none";
+    restartButton.style.display = "block";
+    while (messageInfo.childElementCount > 0) {
+      messageInfo.removeChild(messageInfo.lastElementChild);
+    }
+    let aftergameInfo = document.createElement("p");
+    aftergameInfo.innerHTML =
+      'The computer wins!<br><br>Click "Restart Game" to play again!';
+    messageInfo.appendChild(aftergameInfo);
     return true;
   } else if (computer.gameboard.allShipsSunk()) {
     console.log("the player wins!");
     gameStarted = false;
+
+    yourTurnText.style.display = "none";
+    enemyTurnText.style.display = "none";
+    restartButton.style.display = "block";
+    while (messageInfo.childElementCount > 0) {
+      messageInfo.removeChild(messageInfo.lastElementChild);
+    }
+    let aftergameInfo = document.createElement("p");
+    aftergameInfo.innerHTML =
+      'You win!<br><br>Click "Restart Game" to play again!';
+    messageInfo.appendChild(aftergameInfo);
     return true;
   }
   return false;
+}
+
+function restartGame() {
+  player = new Player();
+  computer = new Computer();
+  computer.createShips();
+  updateBoards(player.gameboard, computer.gameboard);
+  gameStarted = false;
+  startButton.style.display = "block";
+  restartButton.style.display = "none";
+  while (messageInfo.childElementCount > 0) {
+    messageInfo.removeChild(messageInfo.lastElementChild);
+  }
+  let pregameInfo = document.createElement("p");
+  pregameInfo.innerHTML =
+    'Place your ships by selecting them on the left and then clicking on your board. The orientation can be changed by clicking f<br><br>After placing your ships press "Start Game"';
+  messageInfo.appendChild(pregameInfo);
+
+  Array.from(selectableShips).forEach((ship, i) => {
+    ship.className = "player-ship-info";
+  });
 }

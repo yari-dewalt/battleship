@@ -8,14 +8,23 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div id="header">
+      <h1 id="title">Battleship</h1>
+      <h3 id="enemy-turn">Enemy Turn</h3>
+      <button id="start-button">Start Game</button>
+      <h3 id="your-turn">Your Turn</h3>
+    </div>
     <div id="container">
       <div class="gameboard" id="player-gameboard"></div>
       <div class="gameboard" id="computer-gameboard"></div>
     </div>
     <div id="game-info">
-      <div id="ships">
-        <h2>Your Ships</h2>
-        <div class="ship-info">
+      <div class="ships" id="player-ships">
+        <div class="ships-header">
+          <h2>Your Ships</h2>
+          <h3 id="orientation">Orientation (F): Horizontal</h3>
+        </div>
+        <div class="player-ship-info">
           <div class="ship-name">
             <p>(5) Aircraft Carrier</p>
           </div>
@@ -27,7 +36,7 @@
             <div class="square-identity ship"></div>
           </div>
         </div>
-        <div class="ship-info">
+        <div class="player-ship-info">
           <div class="ship-name">
             <p>(4) Battleship</p>
           </div>
@@ -38,7 +47,7 @@
             <div class="square-identity ship"></div>
           </div>
         </div>
-        <div class="ship-info">
+        <div class="player-ship-info">
           <div class="ship-name">
             <p>(3) Submarine</p>
           </div>
@@ -48,7 +57,7 @@
             <div class="square-identity ship"></div>
           </div>
         </div>
-        <div class="ship-info">
+        <div class="player-ship-info">
           <div class="ship-name">
             <p>(3) Cruiser</p>
           </div>
@@ -58,7 +67,7 @@
             <div class="square-identity ship"></div>
           </div>
         </div>
-        <div class="ship-info">
+        <div class="player-ship-info">
           <div class="ship-name">
             <p>(2) Destroyer</p>
           </div>
@@ -69,7 +78,69 @@
         </div>
       </div>
       <div class="information">
-        <p>test</p>
+        <h2>Game Info</h2>
+        <p>
+          Place your ships by selecting them on the left and then clicking on
+          your board. The orientation can be changed by clicking f
+        </p>
+        <p>After placing your ships press "Start Game"</p>
+      </div>
+      <div class="ships" id="enemy-ships">
+        <div class="ships-header">
+          <h2>Enemy Ships</h2>
+        </div>
+        <div class="enemy-ship-info">
+          <div class="ship-name">
+            <p>(5) Aircraft Carrier</p>
+          </div>
+          <div class="ship-layout">
+            <div class="square-identity ship"></div>
+            <div class="square-identity ship"></div>
+            <div class="square-identity ship"></div>
+            <div class="square-identity ship"></div>
+            <div class="square-identity ship"></div>
+          </div>
+        </div>
+        <div class="enemy-ship-info">
+          <div class="ship-name">
+            <p>(4) Battleship</p>
+          </div>
+          <div class="ship-layout">
+            <div class="square-identity ship"></div>
+            <div class="square-identity ship"></div>
+            <div class="square-identity ship"></div>
+            <div class="square-identity ship"></div>
+          </div>
+        </div>
+        <div class="enemy-ship-info">
+          <div class="ship-name">
+            <p>(3) Submarine</p>
+          </div>
+          <div class="ship-layout">
+            <div class="square-identity ship"></div>
+            <div class="square-identity ship"></div>
+            <div class="square-identity ship"></div>
+          </div>
+        </div>
+        <div class="enemy-ship-info">
+          <div class="ship-name">
+            <p>(3) Cruiser</p>
+          </div>
+          <div class="ship-layout">
+            <div class="square-identity ship"></div>
+            <div class="square-identity ship"></div>
+            <div class="square-identity ship"></div>
+          </div>
+        </div>
+        <div class="enemy-ship-info">
+          <div class="ship-name">
+            <p>(2) Destroyer</p>
+          </div>
+          <div class="ship-layout">
+            <div class="square-identity ship"></div>
+            <div class="square-identity ship"></div>
+          </div>
+        </div>
       </div>
     </div>
   </body>

@@ -7,6 +7,39 @@ body {
   flex-direction: column;
 }
 
+div#header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+}
+
+div#header > #title {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+div#header > #start-button {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+div#header > #restart-button {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+div#header > #enemy-turn {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+div#header > #your-turn {
+  grid-column: 3;
+  grid-row: 2;
+}
+
 div#container {
   width: 100%;
   height: 100%;
@@ -41,11 +74,9 @@ div.grid-square {
 
 div.grid-square:hover {
   transform: scale(1.2);
-}
-
-div#computer-gameboard > div.grid-row > div.grid-square:hover {
   cursor: pointer;
 }
+
 div.square-identity {
   flex-grow: 1;
 }
@@ -68,22 +99,57 @@ div.hit {
 
 div#game-info {
   display: flex;
+  padding: 1rem;
+  gap: 1rem;
 }
 
-div#ships {
+div.ships {
   width: 50%;
 }
 
-div.ship-info {
+div.ships-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+}
+
+div.player-ship-info {
   display: flex;
   width: 100%;
   align-items: center;
+  border: dotted black 1px;
+}
+
+div.player-ship-info:hover {
+  cursor: pointer;
+}
+
+div.player-ship-info.selected {
+  background-color: lightblue;
+}
+
+div.player-ship-info.placed {
+  background-color: lightgreen;
 }
 
 div.ship-info > div.ship-name {
 }
 
-div.ship-info > div.ship-layout {
+div.player-ship-info > div.ship-layout {
+  flex-grow: 1;
+  display: flex;
+  gap: 0.8rem;
+  padding: 0.8rem;
+}
+
+div.enemy-ship-info {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+div.enemy-ship-info > div.ship-layout {
   flex-grow: 1;
   display: flex;
   gap: 0.8rem;
@@ -97,4 +163,18 @@ div.ship-layout > div.ship {
 }
 
 div.information {
+}
+
+div.information > div.information-header {
+  text-align: center;
+}
+
+div.information > div.information-message {
+  border: solid grey 2px;
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+div.information-message p {
+  font-size: 1.2rem;
 }

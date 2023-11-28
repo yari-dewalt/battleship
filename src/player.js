@@ -64,7 +64,6 @@ class Computer {
         }
       }
     }
-    console.log(this.gameboard.ships);
   }
 
   makeMove(gameboard) {
